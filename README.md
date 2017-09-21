@@ -1,2 +1,3 @@
 # lc1
 lactationCalculator
+The live version of this calculator is accessible from lactationstuff.com, a web site for my sister Sharon Curry's lactation consulting work.  The goal of the calculator is to run through a browser on a handheld device, so it can be easily accessed while working with lactation clients.  Various values such as baby weights and amount of milk ingested are entered, calculations performed, and a summary can be emailed to an entered address.  The idea was to automate a lot of casual note taking that was later entered in to a more formal report.  The code is HTML5, Javascript, CSS, and PHP.   
