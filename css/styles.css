@@ -1,0 +1,49 @@
+body {
+    background-color: #604ad4;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 120%;
+}
+
+input[type="text"] {
+    font-size:85%;
+}
+input[type="number"] {
+    font-size:85%;
+}
+
+#bname { 
+	width: 110px;
+}
+#date { 
+	width: 110px;
+}
+#time { 
+	width: 110px;
+}
+#totaloz,totalml { 
+	width: 110px;
+	font-weight: bold;
+}
+#total {
+/*	border-style: dashed; */
+  padding: 15px;
+  width: 15em;
+  color: #BEF202;
+  outline: 5px solid #BEF202;
+  /*box-shadow: 0 0 0 10px #69D2E7;*/
+}
+
+a:link {
+    color: white;
+    font-size: 90%;
+  }
+a:visited {
+    color: white;
+  }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

@@ -1,0 +1,243 @@
+<!-- Al Curry 
+     February 2017
+     html code for Lactation Calculator
+
+     March 28, 2017 - enhanced to send email 
+
+     this is the main page of the calculator
+     calls javascript functions in convert.js
+     uses styles.css
+     calls send_email.php
+-->
+<!doctype html>
+<html lang="en-us">
+<head>
+	<metacharset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/styles.css">
+    <title>Lactation Calculations</title></head>
+<body>
+
+<h3>Lactation Calculations  &nbsp&nbsp <a href="about.html" target="_blank" >Info</a></h3>
+
+
+<form method="post" action="send_email.php">
+
+	For <input type="text" name="bname" id="bname" placeholder="  baby name"/> on
+	<output type="text" name="date" id="date"></output> 
+	
+	
+	<br/><br/>
+	
+	Birth date :&nbsp;<input type="number" name="month" id="month"  style="width: 26px;"/>
+	            <input type="number" name="day" id="day"  style="width: 23px;"/>
+	            <input type="number" name="year" id="year"  style="width: 23px;"/>
+                days old: &nbsp<output type="number" readonly="true" name="age" id="age" style="width: 40px;"></output>
+                <input type="hidden" name="ageh" id="ageh" value="<?php echo $_POST['ageh']; ?>"/>
+
+    <br/>
+    <small>(mm dd yy)</small>
+    <br/>
+    <br/>
+
+    <input type="button" value="Clear"  onclick="clearFields(-1);" />
+
+
+<h3>Birthweight</h3>
+
+	Lbs: <input type="number" step="0.01" name="pounds0" id="lbs0" style="width: 30px;"/>
+	
+	Oz: <input  type="number" step="0.01" step="0.01" name="ounces0" id="oz0" style="width: 33px;"/>
+	
+	&nbsp or 
+	Grams: <input type="number" step="0.01" name="grams0" id="grams0" style="width: 50px;"/>
+
+	<br/><br/>
+
+    <input type="button" value="Submit"  onclick="convert(0);" />
+
+    <input type="button" value="Clear"  onclick="clearFields(0);" />
+
+
+
+<br/>
+<hr>
+<h3>Today's naked weight</h3>
+
+	Lbs: <input type="number" step="0.01" name="pounds1" id="lbs1" style="width: 30px;"/>
+	
+	Oz: <input type="number" step="0.01" name="ounces1" id="oz1" style="width: 33px;"/>
+	
+	&nbsp or 
+	Grams: <input type="number" step="0.01" name="grams1" id="grams1" style="width: 50px;"/>
+	
+	<br/><br/>
+
+    <input type="button" value="Submit"  onclick="convert(1);" />
+
+    <input type="button" value="Clear"  onclick="clearFields(1);" />
+
+	<br/><br/>
+
+	<output type="text" readonly="true" name="weightmsg" id="weightmsg" style="width: 120px;"></output>
+	<input type="hidden" name="weightmsgh" id="weightmsgh" value="<?php echo $_POST['weightmsgh']; ?>"/>
+
+<!-- Al Curry - February 2017
+     html code for Lactation Calculator
+-->
+<br/>
+<hr>
+<h3>Test weight</h3>
+<h4>weight in dry diaper pre feed</h4>
+
+	Lbs: <input type="number" step="0.01" name="pounds2" id="lbs2" style="width: 30px;"/>
+	
+	Oz: <input type="number" step="0.01" name="ounces2" id="oz2" style="width: 33px;"/>
+	
+	&nbsp or 
+	Grams: <input type="number" step="0.01" name="grams2" id="grams2" style="width: 50px;"/>
+	
+	<br/><br/>
+
+    <input type="button" value="Submit"  onclick="convert(2);" />
+
+    <input type="button" value="Clear"  onclick="clearFields(2);" />
+
+
+
+<br/>
+<hr>
+<h3>Weight after 1st side -</h3>
+
+	Lbs: <input type="number" step="0.01" name="pounds3" id="lbs3" style="width: 30px;"/>
+	
+	Oz: <input type="number" step="0.01" name="ounces3" id="oz3" style="width: 33px;"/>
+	
+	&nbsp or
+	Grams: <input type="number" step="0.01" name="grams3" id="grams3" style="width: 50px;"/>
+	
+	<br/><br/>
+    <input type="button" value="Submit"  onclick="transfer(1);" />
+    <input type="button" value="Clear"  onclick="clearFields(3);" />
+
+	<br/><br/>
+    Amount transferred:  <input type="number" step="0.01" name="ozt1" id="ozt1" style="width: 40px;display:inline"/>
+	
+	oz
+		&nbsp;&nbsp;
+	<input type="number" step="0.01" name="mlt1" id="mlt1" style="width: 40px;display:inline"/> 
+	ml
+
+<br/>
+<hr>
+<h3>Weight after 2nd side -</h3>
+
+	Lbs: <input type="number" step="0.01" name="pounds4" id="lbs4" style="width: 30px;"/>
+	
+	Oz: <input type="number" step="0.01" name="ounces4" id="oz4" style="width: 33px;"/>
+	
+	&nbsp or
+	Grams: <input type="number" step="0.01" name="grams4" id="grams4" style="width: 50px;"/>
+	
+	<br/><br/>
+	
+    <input type="button" value="Submit"  onclick="transfer(2);" />
+    <input type="button" value="Clear"  onclick="clearFields(4);" />
+
+	<br/><br/>
+    Amount transferred:  <input type="number" step="0.01" name="ozt2" id="ozt2" style="width: 40px;"/>
+	
+	oz
+		&nbsp;&nbsp;
+	<input type="number" step="0.01" name="mlt2" id="mlt2" style="width: 40px;"/> 
+	ml
+	<br/><br/>
+
+<hr>
+<h3 style="display: inline">Weight after 3rd side -</h3>
+<h4 style="display: inline">(optional)</h4>
+
+    <br/>
+    <br/>
+    Lbs: <input type="number" step="0.01" name="pounds5" id="lbs5" style="width: 30px;"/>
+	
+	Oz: <input type="number" step="0.01" name="ounces5" id="oz5" style="width: 33px;"/>
+	
+	&nbsp or
+	Grams: <input type="number" step="0.01" name="grams5" id="grams5" style="width: 50px;"/>
+	
+	<br/><br/>
+	
+    <input type="button" value="Submit"  onclick="transfer(3);" />
+    <input type="button" value="Clear"  onclick="clearFields(5);" />
+
+	<br/><br/>
+    Amount transferred:  <input type="number" step="0.01" name="ozt3" id="ozt3" style="width: 40px; display:inline"/>
+	
+	oz
+     &nbsp;&nbsp; 
+	<input type="number" step="0.01" name="mlt3" id="mlt3" style="width: 40px; display:inline"/> 
+	ml
+	<br/><br>
+
+<hr>
+<h3 style="display: inline">Weight after 4th side -</h3>
+<h4 style="display: inline">(optional)</h4>
+
+    <br/>
+    <br/>
+    Lbs: <input type="number" step="0.01" name="pounds6" id="lbs6" style="width: 30px;"/>
+	
+	Oz: <input type="number" step="0.01" name="ounces6" id="oz6" style="width: 33px;"/>
+	
+	&nbsp or
+	Grams: <input type="number" step="0.01" name="grams6" id="grams6" style="width: 50px;"/>
+	
+	<br/><br/>
+	
+
+
+    <input type="button" value="Submit"  onclick="transfer(4);" />
+    <input type="button" value="Clear"  onclick="clearFields(6);" />
+
+	<br/><br/>
+    Transfer side 4:  <input type="number" step="0.01" name="ozt4" id="ozt4" style="width: 40px; display:inline"/>
+	
+	oz
+	&nbsp;&nbsp;
+	<input type="number" step="0.01" name="mlt4" id="mlt4" style="width: 40px; display:inline"/> 
+	ml
+	<br/><br/>
+
+
+<hr>
+<br/>
+<div id=total>
+    Total transferred ( adding 1 - 4 ): 
+    &nbsp<output name="totaloz" id="totaloz"></output>&nbsp oz
+    &nbsp&nbsp&nbsp<output name="totalml" id="totalml"></output>&nbsp ml
+	
+    <input type="hidden" name="totalozh" id="totalozh" value="<?php echo $_POST['totalozh']; ?>"/>
+    <input type="hidden" name="totalmlh" id="totalmlh" value="<?php echo $_POST['totalmlh']; ?>"/>
+</div>
+    <br/> 
+        <input type="hidden" name="allFields"/>
+    Email:  <input type="text" name="eAddr" style="width: 100px; display:inline" required/>
+
+    &nbsp;
+
+    <input type="Submit" value="Send" onsubmit="getFields();" />
+
+
+</form>
+<form>
+
+    <br/>
+    <input type="button" value="Clear All"  onclick="clearAll();" />
+</form>
+
+	<script src="js/convert.js"></script>
+</body>
+
+</html>
